@@ -32,6 +32,17 @@ public class PizzaController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/available")
+    public ResponseEntity<List<PizzaEntity>> getAvailable(){
+
+        return ResponseEntity.ok(this.pizzaService.getAvailable());
+    }
+
+    @GetMapping("/name")
+    public ResponseEntity<PizzaEntity> getByName(@RequestParam(name = "name") String name){
+        return ResponseEntity.ok(this.pizzaService.getByName(name));
+    }
+
     @PostMapping
     public ResponseEntity<PizzaEntity> create(@RequestBody PizzaEntity pizza){
         if(pizza.getIdPizza() ==  null || !this.pizzaService.exits(pizza.getIdPizza())) {
