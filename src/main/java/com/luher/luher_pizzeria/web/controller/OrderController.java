@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -32,6 +33,15 @@ public class OrderController {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(this.orderService.getById(idOrder));
+    }
+
+    @GetMapping("/today")
+    public  ResponseEntity<List<OrderEntity>> getTodayOrders(){
+        return ResponseEntity.ok(this.orderService.getTodayOrders());
+    }
+    @GetMapping("/outsite")
+    public  ResponseEntity<List<OrderEntity>> getOutsiteOrders(){
+        return  ResponseEntity.ok(this.orderService.getOutsideOrders());
     }
 
 }
