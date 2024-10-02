@@ -54,6 +54,11 @@ public class PizzaController {
 
         return ResponseEntity.ok(this.pizzaService.getWithout(ingredient));
     }
+    @GetMapping("/cheapest")
+    public ResponseEntity<List<PizzaEntity>> getChepesPizzas(@RequestParam(name = "price") double price){
+
+        return ResponseEntity.ok(this.pizzaService.getCheapest(price));
+    }
 
     @PostMapping
     public ResponseEntity<PizzaEntity> create(@RequestBody PizzaEntity pizza){
