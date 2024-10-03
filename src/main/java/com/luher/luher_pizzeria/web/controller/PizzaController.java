@@ -1,9 +1,9 @@
 package com.luher.luher_pizzeria.web.controller;
 
 import com.luher.luher_pizzeria.persistence.entity.PizzaEntity;
-import com.luher.luher_pizzeria.persistence.repository.PizzaRepository;
 import com.luher.luher_pizzeria.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +21,10 @@ public class PizzaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PizzaEntity>> getAll(){
+    public ResponseEntity<Page<PizzaEntity>> getAll(@RequestParam (defaultValue = "0") int page,
+                                                    @RequestParam (defaultValue = "8") int elements){
 
-        return ResponseEntity.ok(this.pizzaService.getAll());
+        return ResponseEntity.ok(this.pizzaService.getAll(page, elements));
     }
     @GetMapping("/{id}")
     public ResponseEntity<PizzaEntity> getById(@PathVariable("id") int idPizza){
@@ -33,9 +34,13 @@ public class PizzaController {
     }
 
     @GetMapping("/available")
-    public ResponseEntity<List<PizzaEntity>> getAvailable(){
+    public ResponseEntity<Page<PizzaEntity>> getAvailable(@RequestParam (defaultValue = "0") int page,
+                                                          @RequestParam (defaultValue = "8") int elements,
+                                                          @RequestParam(defaultValue = "price") String sortBy,
+                                                          @RequestParam(defaultValue = "ASC") String sortDirection
+                                                          ){
 
-        return ResponseEntity.ok(this.pizzaService.getAvailable());
+        return ResponseEntity.ok(this.pizzaService.getAvailable(page, elements, sortBy, sortDirection));
     }
 
     @GetMapping("/name")
