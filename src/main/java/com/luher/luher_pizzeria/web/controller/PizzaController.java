@@ -2,6 +2,7 @@ package com.luher.luher_pizzeria.web.controller;
 
 import com.luher.luher_pizzeria.persistence.entity.PizzaEntity;
 import com.luher.luher_pizzeria.service.PizzaService;
+import com.luher.luher_pizzeria.service.dto.UpdatePizzaPrice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -81,6 +82,18 @@ public class PizzaController {
         }
 
     }
+    @PutMapping("/price")
+    public ResponseEntity<Void> updatePrice(@RequestBody UpdatePizzaPrice dto){
+        if(this.pizzaService.exits(dto.getPizzaId())){
+            this.pizzaService.updatePrice(dto);
+            return  ResponseEntity.ok().build();
+        }else {
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") int idPizza){
         if(this.pizzaService.exits(idPizza)){

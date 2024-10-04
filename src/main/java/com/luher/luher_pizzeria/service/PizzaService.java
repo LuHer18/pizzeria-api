@@ -3,12 +3,14 @@ package com.luher.luher_pizzeria.service;
 import com.luher.luher_pizzeria.persistence.entity.PizzaEntity;
 import com.luher.luher_pizzeria.persistence.repository.PizzaPagSortRepository;
 import com.luher.luher_pizzeria.persistence.repository.PizzaRepository;
+import com.luher.luher_pizzeria.service.dto.UpdatePizzaPrice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -70,6 +72,11 @@ public class PizzaService {
 
     public boolean exits(int idPizza) {
         return pizzaRepository.existsById(idPizza);
+    }
+
+    @Transactional
+    public void updatePrice(UpdatePizzaPrice dto){
+        this.pizzaRepository.updatePrice(dto);
     }
 
 
