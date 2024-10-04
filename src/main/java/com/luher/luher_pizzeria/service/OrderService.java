@@ -1,6 +1,7 @@
 package com.luher.luher_pizzeria.service;
 
 import com.luher.luher_pizzeria.persistence.entity.OrderEntity;
+import com.luher.luher_pizzeria.persistence.projection.OrderSummary;
 import com.luher.luher_pizzeria.persistence.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +40,12 @@ public class OrderService {
     public  List<OrderEntity> getOutsideOrders(){
         List<String> methods = Arrays.asList(DELIVERY, CARRYOUT);
         return this.orderRepository.findAllByMethodIn(methods);
+    }
+
+    public List<OrderEntity> getCustomerOrders(String idConstumer) {
+        return this.orderRepository.findCustomerOrder(idConstumer);
+    }
+    public OrderSummary getSummary (int orderId){
+        return this.orderRepository.findSummary(orderId);
     }
 }

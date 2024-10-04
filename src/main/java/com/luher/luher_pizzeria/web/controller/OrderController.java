@@ -1,12 +1,10 @@
 package com.luher.luher_pizzeria.web.controller;
 
 import com.luher.luher_pizzeria.persistence.entity.OrderEntity;
+import com.luher.luher_pizzeria.persistence.projection.OrderSummary;
 import com.luher.luher_pizzeria.service.OrderService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -42,6 +40,15 @@ public class OrderController {
     @GetMapping("/outsite")
     public  ResponseEntity<List<OrderEntity>> getOutsiteOrders(){
         return  ResponseEntity.ok(this.orderService.getOutsideOrders());
+    }
+
+    @GetMapping("/customers")
+    public  ResponseEntity<List<OrderEntity>> getCostumerOrder(@RequestParam(name = "idCustomer") String idCustomer){
+        return  ResponseEntity.ok(this.orderService.getCustomerOrders(idCustomer));
+    }
+    @GetMapping("/summary")
+    public  ResponseEntity<OrderSummary> getSummary(@RequestParam(name = "orderId") int orderId){
+        return  ResponseEntity.ok(this.orderService.getSummary(orderId));
     }
 
 }
