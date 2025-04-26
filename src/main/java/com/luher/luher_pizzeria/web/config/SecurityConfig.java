@@ -36,23 +36,6 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService memoryUser(){
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN")
-                .build();
-
-        UserDetails customer = User.builder()
-                .username("customer")
-                .password(passwordEncoder().encode("customer123"))
-                .roles("CUSTOMER")
-                .build();
-
-        return  new InMemoryUserDetailsManager(admin, customer);
-    }
-
-    @Bean
     public PasswordEncoder passwordEncoder(){
         return  new BCryptPasswordEncoder();
     }

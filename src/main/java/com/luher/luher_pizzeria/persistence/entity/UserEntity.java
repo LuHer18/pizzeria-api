@@ -1,15 +1,14 @@
 package com.luher.luher_pizzeria.persistence.entity;
 
 import com.sun.jdi.PrimitiveValue;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.scheduling.support.SimpleTriggerContext;
+
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -33,4 +32,7 @@ public class UserEntity {
 
     @Column(nullable = false, columnDefinition = "TINYINT")
     private Boolean disable;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<UserRoleEntity> roles;
 }
