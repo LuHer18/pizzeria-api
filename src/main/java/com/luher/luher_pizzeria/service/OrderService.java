@@ -3,6 +3,7 @@ package com.luher.luher_pizzeria.service;
 import com.luher.luher_pizzeria.persistence.entity.OrderEntity;
 import com.luher.luher_pizzeria.persistence.projection.OrderSummary;
 import com.luher.luher_pizzeria.persistence.repository.OrderRepository;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -42,6 +43,7 @@ public class OrderService {
         return this.orderRepository.findAllByMethodIn(methods);
     }
 
+    @Secured("ROLE_ADMIN")
     public List<OrderEntity> getCustomerOrders(String idConstumer) {
         return this.orderRepository.findCustomerOrder(idConstumer);
     }
