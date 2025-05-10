@@ -3,7 +3,9 @@ package com.luher.luher_pizzeria.persistence.audit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
@@ -19,4 +21,12 @@ public class AuditableEntity {
     @LastModifiedDate
     @JsonIgnore
     private LocalDateTime modifiedDate;
+
+    @CreatedBy
+    @Column(name = "created_by")
+    private String createdBy;
+
+    @LastModifiedBy
+    @Column(name = "modified_by")
+    private String modifiedBy;
 }
